@@ -1,5 +1,14 @@
 # 2b IMPLEMENTATION OF SLIDING WINDOW PROTOCOL
+
+NAME:RAMYA.P
+
+REGISTER NUMBER: 212223240137
+
+DEPARTMENT: AIML
+
 ## AIM
+To implement of sliding window protocal.
+
 ## ALGORITHM:
 1. Start the program.
 2. Get the frame size from the user
@@ -8,6 +17,44 @@
 5. If your frames reach the server it will send ACK signal to client
 6. Stop the Program
 ## PROGRAM
+## CLIENT:
+```
+import socket
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+size=int(input("Enter number of frames to send: "))
+l=list(range(size))
+s=int(input("Enter Window Size: "))
+st=0
+i=0
+while True:
+    while(i<len(l)):
+        st+=s
+        c.send(str(l[i:st]).encode())
+        ack=c.recv(1024).decode()
+        if ack:
+            print(ack)
+            i+=s
+
+```
+## SERVER:
+```
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+while True:
+    print(s.recv(1024).decode())
+    s.send("acknowledgement recieved from the server".encode())
+```
+
 ## OUPUT
+## CLIENT:
+![image](https://github.com/23014107/2b_SLIDING_WINDOW_PROTOCOL/assets/151625620/b3eef86d-bd8c-4db8-95c0-2a5972c5971c)
+
+## SERVER:
+![image](https://github.com/23014107/2b_SLIDING_WINDOW_PROTOCOL/assets/151625620/937fa64a-0b03-4743-951b-95168742d0dd)
+
 ## RESULT
 Thus, python program to perform stop and wait protocol was successfully executed
